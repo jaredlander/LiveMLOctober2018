@@ -1,0 +1,28 @@
+$$
+    Y = f(X)
+$$
+
+Linear Regression
+
+$$
+    y = a + b_1x_1 + b_2x_2 + \ldots + b_px_p
+$$
+
+
+$$
+    \min_{\beta_{0},\beta \in \mathbb{R}^{p+1}} \left[ \frac{1}{2N} \sum_{i=1}^N \left( y_i -x_i^T\beta \right)^2 + \lambda P_{\alpha} \left(\beta \right) \right]
+$$
+where
+$$
+    P_{\alpha} \left(\beta \right) = \left(1 - \alpha \right) \frac{1}{2}||\Gamma\beta||_{\mathit{l}_2}^2 + \alpha ||\Gamma\beta||_{\mathit{l}_1}
+$$
+
+$$
+    ||\beta||^2 = \sum_{i=1}^p |b_i|^2
+$$
+
+$$
+    ||\beta|| = \sum_{i=1}^p |b_i|
+$$
+
+
