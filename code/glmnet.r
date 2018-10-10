@@ -36,3 +36,6 @@ head(coef(value2), n=30)
 View(as.matrix(coef(value2)))
 
 plot(value2, xvar='lambda')
+plot(value2, xvar='lambda', label=TRUE)
+
+coefpath(value2)
