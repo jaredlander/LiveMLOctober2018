@@ -39,3 +39,14 @@ plot(value2, xvar='lambda')
 plot(value2, xvar='lambda', label=TRUE)
 
 coefpath(value2)
+
+library(animation)
+cv.ani(k=10)
+
+value3 <- cv.glmnet(x=landX_train, y=landY_train, family='gaussian', nfolds=5)
+plot(value3)
+coefpath(value3)
+
+coefplot(value3, sort='magnitude', lambda=exp(11))
+coefplot(value3, sort='magnitude', lambda='lambda.min')
+coefplot(value3, sort='magnitude', lambda='lambda.1se')
