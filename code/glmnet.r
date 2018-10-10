@@ -50,3 +50,27 @@ coefpath(value3)
 coefplot(value3, sort='magnitude', lambda=exp(11))
 coefplot(value3, sort='magnitude', lambda='lambda.min')
 coefplot(value3, sort='magnitude', lambda='lambda.1se')
+
+value4 <- cv.glmnet(x=landX_train, y=landY_train,
+                    family='gaussian', nfolds=5,
+                    alpha=1)
+
+value5 <- cv.glmnet(x=landX_train, y=landY_train,
+                    family='gaussian', nfolds=5,
+                    alpha=0)
+coefpath(value5)
+
+value6 <- cv.glmnet(x=landX_train, y=landY_train,
+                    family='gaussian', nfolds=5,
+                    alpha=0.6)
+coefpath(value6)
+
+coefplot(value6, sort='magnitude', lambda='lambda.1se')
+coefplot(value5, sort='magnitude', lambda='lambda.1se')
+
+land_test <- readRDS('data/manhattan_Test.rds')
+landX_test <- build.x(valueFormula, data=land_test, 
+                      contrasts=FALSE, sparse=TRUE)
+
+valuePredictions6 <- predict(value6, newx=landX_test, s='lambda.1se')
+head(valuePredictions6, n=20)
