@@ -99,3 +99,8 @@ hist6 <- xgb.train(
 dygraph(hist6$evaluation_log)
 hist6$best_iteration
 hist6$best_score
+
+hist6 %>% 
+    xgb.importance(feature_names=colnames(landX_train)) %>% 
+    dplyr::slice(1:20) %>% 
+    xgb.plot.importance()
