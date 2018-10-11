@@ -250,3 +250,11 @@ hist17 <- xgb.train(
     lambda=2
 )
 coefplot(hist17, sort='magnitude')
+
+land_test <- readRDS('data/manhattan_Test.rds')
+
+landX_test <- build.x(histFormula, data=land_test, 
+                      contrasts=FALSE, sparse=TRUE)
+
+histPredictions9 <- predict(hist9, newdata=landX_test, outputmargin=FALSE)
+head(histPredictions9, 20)
