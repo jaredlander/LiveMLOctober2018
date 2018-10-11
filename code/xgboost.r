@@ -104,3 +104,78 @@ hist6 %>%
     xgb.importance(feature_names=colnames(landX_train)) %>% 
     dplyr::slice(1:20) %>% 
     xgb.plot.importance()
+
+hist7 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=500,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=10,
+    early_stopping_rounds=60,
+    max_depth=9
+)
+
+hist8 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=1500,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=20,
+    early_stopping_rounds=60,
+    max_depth=2
+)
+
+hist9 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=1500,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=20,
+    early_stopping_rounds=60,
+    max_depth=5,
+    eta=0.15
+)
+
+hist10 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=800,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=10,
+    max_depth=5,
+    eta=0.3,
+    subsample=0.5, colsample_bytree=0.5
+)
+
+hist11 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=1,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=10,
+    max_depth=5,
+    eta=0.3,
+    subsample=0.5, colsample_bytree=0.5,
+    num_parallel_tree=100
+)
+
+hist12 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=100,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=10,
+    max_depth=5,
+    eta=0.3,
+    subsample=0.5, colsample_bytree=0.5,
+    num_parallel_tree=20
+)
