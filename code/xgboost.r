@@ -179,3 +179,74 @@ hist12 <- xgb.train(
     subsample=0.5, colsample_bytree=0.5,
     num_parallel_tree=20
 )
+
+hist13 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=50,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=10,
+    max_depth=5,
+    eta=0.3,
+    subsample=0.5, colsample_bytree=0.5,
+    num_parallel_tree=20,
+    nthread=2
+)
+
+hist14 <- xgb.train(
+    data=xgTrain,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    nrounds=100,
+    early_stopping_rounds=30,
+    booster='gblinear',
+    objective='reg:logistic',
+    eval_metric='logloss'
+)
+
+dygraph(hist14$evaluation_log)
+
+library(coefplot)
+coefplot(hist14, sort='magnitude')
+
+hist15 <- xgb.train(
+    data=xgTrain,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    nrounds=100,
+    early_stopping_rounds=30,
+    booster='gblinear',
+    objective='reg:logistic',
+    eval_metric='logloss',
+    alpha=exp(11.5)
+)
+coefplot(hist15, sort='magnitude')
+
+hist16 <- xgb.train(
+    data=xgTrain,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    nrounds=100,
+    early_stopping_rounds=30,
+    booster='gblinear',
+    objective='reg:logistic',
+    eval_metric='logloss',
+    alpha=exp(0.1)
+)
+coefplot(hist16, sort='magnitude')
+
+hist17 <- xgb.train(
+    data=xgTrain,
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    nrounds=300,
+    early_stopping_rounds=30,
+    booster='gblinear',
+    objective='reg:logistic',
+    eval_metric='logloss',
+    alpha=exp(0.01),
+    lambda=2
+)
+coefplot(hist17, sort='magnitude')
