@@ -25,4 +25,21 @@ $$
     ||\beta|| = \sum_{i=1}^p |b_i|
 $$
 
+# Binary Outcome
+
+$$
+    logloss = ylog(p) + (1-y)log(1-p)
+$$
+
+```{r}
+1*log(0.8) + (1 - 1)*log(1 - 0.8)
+0*log(0.8) + (1 - 0)*log(1 - 0.8)
+```
+
+# Residuals
+
+$$
+    residual = y - \hat{y}
+$$
+
 
