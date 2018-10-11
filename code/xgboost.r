@@ -35,3 +35,12 @@ xgTrain <- xgb.DMatrix(data=landX_train, label=landY_train)
 xgTrain
 xgVal <- xgb.DMatrix(data=landX_val, label=landY_val)
 
+hist1 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=1
+)
+hist1
+summary(hist1)
+
+xgb.plot.multi.trees(hist1, feature_names=colnames(landX_train))
