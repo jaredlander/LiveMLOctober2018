@@ -44,3 +44,58 @@ hist1
 summary(hist1)
 
 xgb.plot.multi.trees(hist1, feature_names=colnames(landX_train))
+
+hist2 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=1,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain)
+)
+
+hist3 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=100,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain),
+    print_every_n=1
+)
+
+xgb.plot.multi.trees(hist3, feature_names=colnames(landX_train))
+
+hist4 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=300,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain),
+    print_every_n=1
+)
+
+hist5 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=300,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1
+)
+
+hist5$evaluation_log
+dygraph(hist5$evaluation_log)
+
+
+hist6 <- xgb.train(
+    data=xgTrain,
+    objective='binary:logistic',
+    nrounds=300,
+    eval_metric='logloss',
+    watchlist=list(train=xgTrain, validate=xgVal),
+    print_every_n=1,
+    early_stopping_rounds=60
+)
+
+dygraph(hist6$evaluation_log)
+hist6$best_iteration
+hist6$best_score
